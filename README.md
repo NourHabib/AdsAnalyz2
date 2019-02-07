@@ -3,4 +3,4 @@
 # Run Restful Api server
 `node server.js`
 # Run dev server 
-ng serve --open
+`ng serve --open`
