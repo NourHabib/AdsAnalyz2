@@ -1,0 +1,13 @@
+<h2 class="difPrecent">{{difPrecent}} %</h2>  
+<app-pei-chart *ngIf="theLabels" [dataSource1]="dataSource1" [dataSource2]="dataSource2" [theLabels]="theLabels"></app-pei-chart>
+<div>
+  <div style="display: block">
+    <canvas height="500px" baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>

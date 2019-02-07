@@ -1,0 +1,4 @@
+
+<app-advs-menu (advSelected)="childAdvSelected($event);camp1.getCamp(selectedAdv.id);camp1.backToCampians()"></app-advs-menu>
+<app-main-content #camp1 [adv]="selectedAdv"> </app-main-content>
+<router-outlet></router-outlet>

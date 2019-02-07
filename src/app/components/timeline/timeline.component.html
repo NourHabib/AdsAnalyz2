@@ -1,0 +1,40 @@
+<div class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Clicks TimeLine Chart</h3>
+        </div>
+        <ul>
+            <app-area-chart [theLegend]="['clicks']" [theLabels]="theDates" [dataSource]="theClicks"></app-area-chart>
+        </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Installs TimeLine Chart</h3>
+        </div>
+        <ul>
+            <app-area-chart [theLegend]="['Installs']" [theLabels]="theDates" [dataSource]="theInstalls"></app-area-chart>
+        </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Impressions TimeLine Chart</h3>
+        </div>
+        <ul>
+            <app-area-chart [theLegend]="['Impressions']" [theLabels]="theDates" [dataSource]="theImpressions"></app-area-chart>
+        </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cost Micros TimeLine Chart</h3>
+        </div>
+        <ul>
+            <app-area-chart [theLegend]="['Cost Micros']" [theLabels]="theDates" [dataSource]="theCost"></app-area-chart>
+        </ul>
+    </div>
+  </div>

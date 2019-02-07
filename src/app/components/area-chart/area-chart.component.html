@@ -1,0 +1,11 @@
+<div *ngIf="theLegend">
+        <div style="display: block">
+          <canvas height="100px" baseChart #baseChart="base-chart"
+                  [datasets]="areaChartData"
+                  [labels]="areaChartLabels"
+                  [options]="areaChartOptions"
+                  [legend]="areaChartLegend"
+                  [chartType]="areaChartType">
+          </canvas>
+        </div>
+      </div>

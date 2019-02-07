@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.main-sidebar{
+    -webkit-transition: all 2s ease-out;
+    -moz-transition: all 2s ease-out;
+    -o-transition: all 2s ease-out;
+    transition: all 2s ease-out;
+}
+#meanu-mobile{
+    display:none;
+}
+
+  #meanu-mobile i{
+         font-size:30px;
+         color:#fff;
+  }
+@media (max-width: 767px) {
+.btn-group .btn {
+  display: block;
+  width: 100%;
+  margin:0 !important;
+  border:solid 1px;
+  border-radius:0 !important;
+  font-size:1rem;
+}
+.mat-cell{
+    font-size:1rem;
+}
+.main-sidebar.active{
+    transform:translate(0,0);
+} 
+#meanu-mobile{
+    position: fixed;
+    display:block;
+    top: 10px;
+    left: 20px !important;
+    z-index: 100000019;
+  }
+  .box{
+    max-width: 100%;
+    overflow: scroll;
+  }
+}

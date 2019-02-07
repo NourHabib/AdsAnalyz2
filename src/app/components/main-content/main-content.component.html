@@ -1,0 +1,151 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small *ngIf="adv">Control Panel  {{adv.name}}</small>
+      </h1>
+    </section>
+
+    <section class="content">
+        
+      <button type="button" class="btn btn-flat btn-primary btn-lg backTop" (click)="backToCampians()" *ngIf="(selectedRep || timeLineCamp) && !compairRep">
+        <span><i class="fa fa-chevron-left"></i></span>Back</button>
+      <button type="button" class="btn btn-flat btn-primary btn-lg backTop" (click)="backToReports()" *ngIf="compairRep">
+          <span><i class="fa fa-chevron-left"></i></span>Back</button>
+      <!-- Campiagns table -->
+      <div class="row" *ngIf="!selectedRep && !timeLineCamp">
+        <div class="col-xs-12">
+          <div class="box" *ngIf="adv">
+            <div class="box-header">
+              <h3 class="box-title">Campigns for {{adv.name}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <app-table [dispalyData]="camps" [displayedColumns]="['id', 'name', 'start_date', 'end_date', 'cost_model', 'cost']" [select]="true" [action]="'show_reports_timeline'" (actionSelected)="childRepTimeline($event)" (rowSelected)="childCampSelected($event)"></app-table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="box" *ngIf="!adv">
+              <div class="box-header">
+                  <h3 class="box-title">No Advertisor selected</h3>
+                </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+      <!-- Camp reports TimeLine -->
+      <div id="timeLineCharts" class="row" *ngIf="timeLineCamp">
+          <app-timeline *ngIf="reports" [dataSource]="reports"></app-timeline>
+      </div>
+
+      <!-- Last Report detail -->
+      <div class="row" *ngIf="selectedRep && !compairRep">
+          <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Report for Campiagn  <b>{{selectedCamp.name}}</b> in {{selectedRep.date}}</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="col-lg-3 col-xs-6">
+                      <app-small-box [color]="'aqua'" [title]="'Impressions'" [value]="selectedRep.impressions" [icon]="'happy'"></app-small-box>
+                    </div>
+                    <div class="col-lg-3 col-xs-6">
+                      <app-small-box [color]="'yellow'" [title]="'Clicks'" [value]="selectedRep.clicks" [icon]="'android-done'"></app-small-box>
+                    </div>
+                    <div class="col-lg-3 col-xs-6">
+                      <app-small-box [color]="'green'" [title]="'Installs'" [value]="selectedRep.installs" [icon]="'android-download'"></app-small-box>
+                    </div>
+                    <div class="col-lg-3 col-xs-6">
+                      <app-small-box [color]="'red'" [title]="'Cost Micros'" [value]="selectedRep.cost_micros" [icon]="'stats-bars'"></app-small-box>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+      <!-- Reports detail -->
+      <div class="row" *ngIf="selectedRep && !compairRep">
+        <div class="col-xs-12">
+          <div class="box" *ngIf="adv">
+            <div class="box-header">
+              <h3 class="box-title">Early Reports for Campiagn  <b>{{selectedCamp.name}}</b></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <app-table [dispalyData]="reports" [displayedColumns]="['date', 'impressions', 'clicks', 'installs', 'cost_micros']" [select]="false" [action]="'Compair'" (actionSelected)="childRepSelected($event)"></app-table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="box" *ngIf="!adv">
+              <div class="box-header">
+                  <h3 class="box-title">No Advertisor selected</h3>
+                </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+      <div id="compareCharts" class="row" *ngIf="compairRep">
+        <div class="col-md-3">
+          <!-- AREA CHART -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Clicks Compare Chart</h3>
+            </div>
+            <div class="box-body chart-responsive">
+              <app-bar-chart [theLegend]="['Clicks']" [theLabels]="[selectedRep.date,compairRep.date]" [dataSource1]="[selectedRep.clicks]" [dataSource2]="[compairRep.clicks]"></app-bar-chart>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="col-md-3">
+            <!-- AREA CHART -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Installs Compare Chart</h3>
+              </div>
+              <div class="box-body chart-responsive">
+                <app-bar-chart [theLabels]="[selectedRep.date,compairRep.date]" [theLegend]="['installs']" [dataSource1]="[selectedRep.installs]" [dataSource2]="[compairRep.installs]"></app-bar-chart>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <div class="col-md-3">
+              <!-- AREA CHART -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Impressions Compare Chart</h3>
+                </div>
+                <div class="box-body chart-responsive">
+                  <app-bar-chart [theLabels]="[selectedRep.date,compairRep.date]" [theLegend]="['impressions']" [dataSource1]="[selectedRep.impressions]" [dataSource2]="[compairRep.impressions]"></app-bar-chart>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <div class="col-md-3">
+                <!-- AREA CHART -->
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Cost Micors Compare Chart</h3>
+                  </div>
+                  <div class="box-body chart-responsive">
+                    <app-bar-chart [theLabels]="[selectedRep.date,compairRep.date]" [dataSource1]="[selectedRep.cost_micros]" [theLegend]="['CostMicros']" [dataSource2]="[compairRep.cost_micros]"></app-bar-chart>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+              </div>
+
+
+      </div>
+      <!-- /.row -->
+      
+    </section>
+
+    </div>
