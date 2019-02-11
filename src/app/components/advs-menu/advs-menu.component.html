@@ -7,10 +7,12 @@
 <aside class="main-sidebar" [class.active]="isActive">
     <!-- sidebar-->
     <section class="sidebar">
+      
       <!-- sidebar menu -->
       <ul class="sidebar-menu">
         <li class="header">Advertisors</li>
-        <li [class.active]="item === selectedAdv" *ngFor="let item of advItems" (click)="selectAdv(item)" >
+        <input type="text" placeholder="search Adv" [(ngModel)]="advSearch" class="form-control">
+        <li [class.active]="item === selectedAdv" *ngFor="let item of advItems | advFilter : advSearch" (click)="selectAdv(item)" >
             <a><i class="fa fa-circle-o text-red"></i> <span>{{ item.name }}</span></a>
         </li> 
       </ul>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Adv } from '../../objects/adv';
 import { AdvsServiceService } from '../../services/advs-service.service';
 
+
 @Component({
   selector: 'app-advs-menu',
   templateUrl: './advs-menu.component.html',
@@ -12,6 +13,7 @@ export class AdvsMenuComponent implements OnInit {
   advItems: Adv[];
   selectedAdv: Adv;
   isActive: Boolean = false;
+  advSearch: String;
 
   @Output() advSelected: EventEmitter<Adv> = new EventEmitter();
 
